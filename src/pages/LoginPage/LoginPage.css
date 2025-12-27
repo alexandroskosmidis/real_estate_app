@@ -1,0 +1,142 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: hsl(var(--background));
+  padding: 1rem;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background-color: hsl(var(--card));
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px hsl(var(--foreground) / 0.08);
+  padding: 2.5rem 2rem;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.02em;
+}
+
+.login-subtitle {
+  font-size: 0.95rem;
+  color: hsl(var(--muted-foreground));
+  margin: 0;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: center; /* center controls when narrower than card */
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 320px; /* flatten width a bit */
+}
+
+.input-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+}
+
+/* Style raw inputs inside the group since TSX doesn't add a class */
+.input-group input {
+  width: 100%;
+  min-height: 44px; /* consistent height */
+  padding: 0.5rem 0.75rem; /* slightly flatter */
+  font-size: 1rem;
+  color: hsl(var(--foreground));
+  background-color: hsl(var(--background));
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.5rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-field::placeholder {
+  color: hsl(var(--muted-foreground));
+}
+
+.input-field:focus {
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.15);
+}
+
+.error-message {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: hsl(var(--destructive));
+  background-color: hsl(var(--destructive) / 0.1);
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.login-button {
+  width: 100%;
+  max-width: 320px; /* match input width */
+  min-height: 44px; /* match input height */
+  padding: 0.5rem 0.75rem; /* slightly flatter */
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #0d6efd; /* Blue */
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.login-button:hover:not(:disabled) {
+  background-color: #0b5ed7; /* Darker blue on hover */
+}
+
+.login-button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.login-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.login-footer {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.login-footer p {
+  font-size: 0.8rem;
+  color: hsl(var(--muted-foreground));
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 2rem 1.5rem;
+    box-shadow: none;
+    border-radius: 0;
+    max-width: 100%;
+  }
+
+  .login-title {
+    font-size: 1.5rem;
+  }
+}
