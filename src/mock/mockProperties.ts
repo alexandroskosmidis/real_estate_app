@@ -16,7 +16,7 @@ export const mockProperties: Property[] = [
     number: "12",
 
     amenities: ["Parking", "Elevator", "Balcony"],
-    photo_url: "C:/Users/Alexandros/Pictures/property_1.png",
+    photo_url: "/property_1.png",
   },
   {
     property_id: 2,
@@ -33,6 +33,6 @@ export const mockProperties: Property[] = [
     number: "45",
 
     amenities: ["Furnished", "Air Condition"],
-    photo_url: "C:/Users/Alexandros/Pictures/property_2.png",
+    photo_url: "/property_2.png",
   },
 ];

@@ -9,18 +9,10 @@ export default function PropertyCard({ property }: Props) {
   const placeholderImg =
     'https://via.placeholder.com/400x300?text=Property+Photo';
 
-  const resolvePhotoUrl = (url: string) => {
-    if (!url) return placeholderImg;
-    if (url.startsWith('http') || url.startsWith('/')) return url;
-    // Normalize Windows paths like C:\Users\... or C:/Users/...
-    const normalized = url.replace(/\\/g, '/');
-    return `file:///${normalized}`;
-  };
-
   return (
     <div className="property-card">
       <img
-        src={resolvePhotoUrl(property.photo_url)}
+        src={property.photo_url}
         alt="Property"
         className="property-image"
         onError={(e) => {
