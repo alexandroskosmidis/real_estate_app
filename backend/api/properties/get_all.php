@@ -1,15 +1,8 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
-header("Content-Type: application/json; charset=UTF-8");
+header("Access-Control-Allow-Origin: http://localhost:5174");
+header("Content-Type: application/json");
 
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
-    exit;
-}
-
-require_once "../../config/db.php";
+require_once "../../config/database.php";
 
 $sql = "
 SELECT
@@ -43,8 +36,18 @@ LEFT JOIN Property_Amenity pa
 ORDER BY p.property_id;
 ";
 
-$stmt = $pdo->query($sql);
-$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$result = mysqli_query($con, $sql);
+
+if (!$result) {
+    http_response_code(500);
+    echo json_encode([
+        "error" => mysqli_error($con)
+    ]);
+    exit;
+}
+
+$rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
 
 $properties = [];
 
