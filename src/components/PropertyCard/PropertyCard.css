@@ -1,0 +1,54 @@
+/* Minimal white card with blue details aligning with Login page */
+.property-card {
+  display: flex;
+  gap: 0;
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  box-shadow: 0 4px 24px hsl(var(--foreground) / 0.08);
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.property-image {
+  width: 240px;
+  height: 180px;
+  object-fit: cover;
+  background-color: hsl(var(--muted));
+}
+
+.property-content {
+  padding: 1rem 1rem;
+  flex: 1;
+}
+
+.property-content h3 {
+  margin: 0 0 0.25rem 0;
+  color: hsl(var(--foreground));
+}
+
+.property-address {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.9rem;
+  margin: 0 0 0.75rem 0;
+}
+
+.property-price strong {
+  color: hsl(var(--primary)); /* Blue accent */
+}
+
+.amenities {
+  margin-top: 0.5rem;
+}
+
+.amenity {
+  display: inline-block;
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--border));
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.8rem;
+}
