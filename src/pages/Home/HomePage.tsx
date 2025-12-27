@@ -1,12 +1,26 @@
+import { useEffect, useState } from "react";
+import type { Property } from "../../components/PropertyCard/Property.types";
+import { fetchProperties } from "../../services/propertyService";
 import PropertyCard from '../../components/PropertyCard/PropertyCard';
-import { mockProperties } from '../../mock/mockProperties';
 
 export default function HomePage() {
-  return (
-    <div style={{ maxWidth: 800, margin: '0 auto' }}>
-      <h1>Available Properties</h1>
+  const [properties, setProperties] = useState<Property[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-      {mockProperties.map(property => (
+  useEffect(() => {
+    fetchProperties()
+      .then(data => setProperties(data))
+      .catch(() => setError("Failed to load properties"))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <p>Loading properties...</p>;
+  if (error) return <p>{error}</p>;
+
+  return (
+    <div>
+      {properties.map(property => (
         <PropertyCard
           key={property.property_id}
           property={property}
