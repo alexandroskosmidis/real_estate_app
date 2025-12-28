@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import type { Property } from "../../components/PropertyCard/Property.types";
 import { fetchProperties } from "../../services/propertyService";
 import PropertyCard from '../../components/PropertyCard/PropertyCard';
-import './HomePage.css';
 
 export default function HomePage() {
   const [properties, setProperties] = useState<Property[]>([]);
@@ -20,7 +19,7 @@ export default function HomePage() {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="property-list">
+    <div>
       {properties.map(property => (
         <PropertyCard
           key={property.property_id}
