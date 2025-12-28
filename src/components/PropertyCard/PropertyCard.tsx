@@ -36,7 +36,7 @@ export default function PropertyCard({ property }: Props) {
         <p><strong>Purpose:</strong> {property.purpose}</p>
 
         <div className="amenities">
-          {property.amenities.map(a => (
+          {property.amenities.slice(0, 3).map(a => (
             <span key={a} className="amenity">
               {a}
             </span>
