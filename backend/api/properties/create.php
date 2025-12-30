@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 require_once "../../config/database.php";
 
-// ⚠ προσωρινά hardcoded user
+// προσωρινό user
 $user_id = 1;
 
 // ---------- READ JSON ----------
@@ -47,12 +47,11 @@ if (!$data) {
     exit;
 }
 
-// ---------- TRANSACTION ----------
 mysqli_begin_transaction($con);
 
 try {
 
-    // ---------- LOCATION ----------
+    // ================== LOCATION ==================
     log_debug("Checking location...");
 
     $stmt = mysqli_prepare($con, "
@@ -72,13 +71,20 @@ try {
     $res = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($res)) {
-        $location_id = $row["location_id"];
+        $location_id = (int)$row["location_id"];
         log_debug("Location exists: ID = $location_id");
     } else {
-        log_debug("Inserting new location...");
+        log_debug("Creating new location...");
+
+        // 🔢 next location_id
+        $r = mysqli_query($con, "SELECT COALESCE(MAX(location_id),0)+1 AS next_id FROM Location");
+        $location_id = mysqli_fetch_assoc($r)["next_id"];
+
         if (!mysqli_query($con, "
-            INSERT INTO Location (city, area, address, number, postal_code)
+            INSERT INTO Location
+            (location_id, city, area, address, number, postal_code)
             VALUES (
+              $location_id,
               '{$data["city"]}',
               '{$data["area"]}',
               '{$data["address"]}',
@@ -88,17 +94,22 @@ try {
         ")) {
             throw new Exception("Location insert failed: " . mysqli_error($con));
         }
-        $location_id = mysqli_insert_id($con);
+
         log_debug("New location ID = $location_id");
     }
 
-    // ---------- PROPERTY ----------
-    log_debug("Inserting property...");
+    // ================== PROPERTY ==================
+    log_debug("Creating property...");
+
+    // 🔢 next property_id
+    $r = mysqli_query($con, "SELECT COALESCE(MAX(property_id),0)+1 AS next_id FROM Property");
+    $property_id = mysqli_fetch_assoc($r)["next_id"];
 
     if (!mysqli_query($con, "
         INSERT INTO Property
-        (price, square_meters, rooms, floor, creation_date, purpose, owner_id, location_id)
+        (property_id, price, square_meters, rooms, floor, creation_date, purpose, owner_id, location_id)
         VALUES (
+          $property_id,
           {$data["price"]},
           {$data["square_meters"]},
           {$data["rooms"]},
@@ -112,10 +123,9 @@ try {
         throw new Exception("Property insert failed: " . mysqli_error($con));
     }
 
-    $property_id = mysqli_insert_id($con);
     log_debug("Property ID = $property_id");
 
-    // ---------- AMENITIES ----------
+    // ================== AMENITIES ==================
     if (!empty($data["amenities"])) {
         foreach ($data["amenities"] as $a) {
             log_debug("Amenity: $a");
@@ -135,7 +145,6 @@ try {
         }
     }
 
-    // ---------- COMMIT ----------
     mysqli_commit($con);
     log_debug("TRANSACTION COMMITTED");
 
