@@ -4,6 +4,9 @@ import type { CreatePropertyPayload } from "../pages/CreatePropertyPage/property
 const API_BASE =
   "https://dblab.nonrelevant.net/~lab2526omada2/backend/api/properties";
 
+// -----------------------------
+// FETCH PROPERTIES
+// -----------------------------
 export async function fetchProperties(): Promise<Property[]> {
   const res = await fetch(`${API_BASE}/get_all.php`);
 
@@ -14,9 +17,17 @@ export async function fetchProperties(): Promise<Property[]> {
   return res.json();
 }
 
+// -----------------------------
+// CREATE PROPERTY
+// -----------------------------
+export type CreatePropertyResponse = {
+  success: boolean;
+  property_id: number;
+};
+
 export async function createProperty(
   data: CreatePropertyPayload
-): Promise<{ success: boolean }> {
+): Promise<CreatePropertyResponse> {
   const res = await fetch(`${API_BASE}/create.php`, {
     method: "POST",
     headers: {
@@ -30,5 +41,26 @@ export async function createProperty(
     throw new Error(error || "Failed to create property");
   }
 
-  return res.json();
+  return res.json(); // { success, property_id }
+}
+
+// -----------------------------
+// UPLOAD PROPERTY PHOTO
+// -----------------------------
+export async function uploadPropertyPhoto(
+  propertyId: number,
+  file: File
+): Promise<void> {
+  const formData = new FormData();
+  formData.append("photo", file);
+  formData.append("property_id", propertyId.toString());
+
+  const res = await fetch(`${API_BASE}/upload_photo.php`, {
+    method: "POST",
+    body: formData,
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to upload photo");
+  }
 }
