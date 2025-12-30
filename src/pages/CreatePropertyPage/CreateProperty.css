@@ -1,0 +1,164 @@
+.create-property-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; 
+  padding: 3rem 1rem;
+  background-color: #f8f9fa; 
+}
+
+
+.create-card {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 800px; 
+  padding: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 2rem;
+  text-align: center;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 1rem;
+}
+
+
+.property-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  gap: 2rem; 
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+}
+
+.form-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #444;
+  margin-left: 0.2rem;
+}
+
+.form-input, 
+.form-select {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  color: #605a5a;
+  background-color: #fffafa; 
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: all 0.2s ease;
+
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.form-select {
+  appearance: none; /* Σβήνει το default βελάκι του browser για να βάλουμε δικό μας ή να είναι καθαρό (προαιρετικό) */
+  background-color: #fffafa;
+  cursor: pointer;
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: #6e1c09;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(110, 28, 9, 0.1);
+}
+
+/* --- Amenities Section --- */
+.amenities-section {
+  background-color: #fffafa;
+  border: 1px solid #eee;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+}
+
+.amenities-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #6e1c09;
+  margin-bottom: 1rem;
+}
+
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Αυτόματα κουτάκια */
+  gap: 0.8rem;
+}
+
+.amenity-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: #555;
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 0.3rem;
+  transition: background 0.2s;
+}
+
+.amenity-checkbox:hover {
+  background-color: #f0e6e4; 
+}
+
+/* Custom Checkbox Color */
+.amenity-checkbox input[type="checkbox"] {
+  accent-color: #6e1c09; /* Κεραμιδί τικ */
+  width: 16px;
+  height: 16px;
+}
+
+/* --- Button (Ίδιο με Login) --- */
+.submit-btn {
+  width: 100%;
+  padding: 1rem;
+  background-color: #6e1c09;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 1rem;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background-color: #4a1005;
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+  .property-form {
+    grid-template-columns: 1fr; /* Μία στήλη σε κινητά */
+  }
+  .full-width {
+    grid-column: span 1;
+  }
+  .property-card {
+    padding: 1.5rem;
+  }
+}

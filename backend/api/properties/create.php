@@ -61,7 +61,7 @@ try {
       {$data["square_meters"]},
       {$data["rooms"]},
       {$data["floor"]},
-      '{$data["creation_date"]}',
+      CURDATE(),
       '{$data["purpose"]}',
       $user_id,
       $location_id
