@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
-import { createProperty, uploadPropertyPhoto } from "../../services/propertyService";
+import { createProperty } from "../../services/propertyService";
 import { fetchAmenities } from "../../services/amenityService";
 
-// -----------------------------
-// Types
-// -----------------------------
 type CreatePropertyForm = {
   purpose: "sale" | "rent";
   square_meters: string;
@@ -45,18 +42,13 @@ export default function CreatePropertyPage() {
   const [otherAmenity, setOtherAmenity] = useState("");
 
   // -----------------------------
-  // Photo state
-  // -----------------------------
-  const [photo, setPhoto] = useState<File | null>(null);
-
-  // -----------------------------
   // UI state
   // -----------------------------
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   // -----------------------------
-  // Fetch amenities
+  // Fetch amenities on load
   // -----------------------------
   useEffect(() => {
     fetchAmenities()
@@ -76,7 +68,9 @@ export default function CreatePropertyPage() {
 
   const toggleAmenity = (amenity: string, checked: boolean) => {
     setSelectedAmenities(prev =>
-      checked ? [...prev, amenity] : prev.filter(a => a !== amenity)
+      checked
+        ? [...prev, amenity]
+        : prev.filter(a => a !== amenity)
     );
   };
 
@@ -89,9 +83,6 @@ export default function CreatePropertyPage() {
     setLoading(true);
 
     try {
-      // -----------------------------
-      // 1️⃣ Create property (JSON)
-      // -----------------------------
       const payload = {
         purpose: form.purpose,
         square_meters: Number(form.square_meters),
@@ -109,20 +100,10 @@ export default function CreatePropertyPage() {
           : selectedAmenities
       };
 
-      const res = await createProperty(payload);
-
-      // -----------------------------
-      // 2️⃣ Upload photo (if exists)
-      // -----------------------------
-      if (photo) {
-        await uploadPropertyPhoto(res.property_id, photo);
-      }
-
+      await createProperty(payload);
       alert("Property created successfully");
 
-      // -----------------------------
-      // Reset form
-      // -----------------------------
+      // optional: reset form
       setForm({
         purpose: "sale",
         square_meters: "",
@@ -138,10 +119,7 @@ export default function CreatePropertyPage() {
       });
       setSelectedAmenities([]);
       setOtherAmenity("");
-      setPhoto(null);
-
-    } catch (err) {
-      console.error(err);
+    } catch {
       setError("Failed to create property");
     } finally {
       setLoading(false);
@@ -171,35 +149,65 @@ export default function CreatePropertyPage() {
           </select>
         </label>
 
-        <input placeholder="Square meters" value={form.square_meters}
-          onChange={e => updateField("square_meters", e.target.value)} />
+        <input
+          placeholder="Square meters"
+          value={form.square_meters}
+          onChange={e => updateField("square_meters", e.target.value)}
+        />
 
-        <input placeholder="Price" value={form.price}
-          onChange={e => updateField("price", e.target.value)} />
+        <input
+          placeholder="Price"
+          value={form.price}
+          onChange={e => updateField("price", e.target.value)}
+        />
 
-        <input type="date" value={form.creation_date}
-          onChange={e => updateField("creation_date", e.target.value)} />
+        <input
+          type="date"
+          value={form.creation_date}
+          onChange={e => updateField("creation_date", e.target.value)}
+        />
 
-        <input placeholder="Rooms" value={form.rooms}
-          onChange={e => updateField("rooms", e.target.value)} />
+        <input
+          placeholder="Rooms"
+          value={form.rooms}
+          onChange={e => updateField("rooms", e.target.value)}
+        />
 
-        <input placeholder="Floor" value={form.floor}
-          onChange={e => updateField("floor", e.target.value)} />
+        <input
+          placeholder="Floor"
+          value={form.floor}
+          onChange={e => updateField("floor", e.target.value)}
+        />
 
-        <input placeholder="City" value={form.city}
-          onChange={e => updateField("city", e.target.value)} />
+        <input
+          placeholder="City"
+          value={form.city}
+          onChange={e => updateField("city", e.target.value)}
+        />
 
-        <input placeholder="Area" value={form.area}
-          onChange={e => updateField("area", e.target.value)} />
+        <input
+          placeholder="Area"
+          value={form.area}
+          onChange={e => updateField("area", e.target.value)}
+        />
 
-        <input placeholder="Address" value={form.address}
-          onChange={e => updateField("address", e.target.value)} />
+        <input
+          placeholder="Address"
+          value={form.address}
+          onChange={e => updateField("address", e.target.value)}
+        />
 
-        <input placeholder="Number" value={form.number}
-          onChange={e => updateField("number", e.target.value)} />
+        <input
+          placeholder="Number"
+          value={form.number}
+          onChange={e => updateField("number", e.target.value)}
+        />
 
-        <input placeholder="Postal code" value={form.postal_code}
-          onChange={e => updateField("postal_code", e.target.value)} />
+        <input
+          placeholder="Postal code"
+          value={form.postal_code}
+          onChange={e => updateField("postal_code", e.target.value)}
+        />
 
         <h4>Amenities</h4>
         {amenities.map(a => (
@@ -217,17 +225,6 @@ export default function CreatePropertyPage() {
           placeholder="Other amenity (optional)"
           value={otherAmenity}
           onChange={e => setOtherAmenity(e.target.value)}
-        />
-
-        <h4>Property Photo</h4>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={e => {
-            if (e.target.files && e.target.files[0]) {
-              setPhoto(e.target.files[0]);
-            }
-          }}
         />
 
         <button type="submit" disabled={loading}>

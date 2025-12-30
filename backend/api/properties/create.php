@@ -148,10 +148,7 @@ try {
     mysqli_commit($con);
     log_debug("TRANSACTION COMMITTED");
 
-    echo json_encode([
-        "success" => true,
-        "property_id" => $property_id
-    ]);
+    echo json_encode(["success" => true]);
 
 } catch (Exception $e) {
 
