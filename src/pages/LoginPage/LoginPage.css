@@ -17,22 +17,28 @@
 }
 
 .login-header {
-  text-align: center;
+  display: flex;            /* Τα βάζει δίπλα δίπλα */
+  align-items: center;      /* Τα κεντράρει κάθετα */
+  justify-content: center;  /* Κεντράρει όλο το γκρουπ στη σελίδα */
+  gap: 1rem;                /* Απόσταση ανάμεσα σε εικόνα και γράμματα */
   margin-bottom: 2rem;
+  text-align: left;         /* Στοίχιση αριστερά για να ταιριάζει με το icon */
 }
 
 .login-title {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: hsl(var(--foreground));
   margin: 0 0 0.5rem 0;
+  line-height: 1.2;
   letter-spacing: -0.02em;
 }
 
 .login-subtitle {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   color: hsl(var(--muted-foreground));
   margin: 0;
+  margin-top: 0.2rem;
 }
 
 .login-form {
@@ -57,13 +63,13 @@
 }
 
 /* Style raw inputs inside the group since TSX doesn't add a class */
-.input-group input {
+.input-field {
   width: 100%;
   min-height: 44px; /* consistent height */
   padding: 0.5rem 0.75rem; /* slightly flatter */
   font-size: 1rem;
   color: hsl(var(--foreground));
-  background-color: hsl(var(--background));
+  background-color: #fffafa; /*hsl(var(--background));*/
   border: 1px solid hsl(var(--border));
   border-radius: 0.5rem;
   outline: none;
@@ -71,32 +77,57 @@
 }
 
 .input-field::placeholder {
-  color: hsl(var(--muted-foreground));
+  /*color: hsl(var(--muted-foreground));*/
+  color: #6e1c09; 
+  opacity: 0.6;  
 }
 
 .input-field:focus {
-  border-color: hsl(var(--primary));
-  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.15);
+  border-color: #6e1c09; /*hsl(var(--primary));*/
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(110, 28, 9, 0.15);
+  /*box-shadow: 0 0 0 3px hsl(var(--primary) / 0.15);*/
 }
 
 .error-message {
-  padding: 0.75rem 1rem;
+  /*padding: 0.75rem 1rem;
   font-size: 0.875rem;
   color: hsl(var(--destructive));
   background-color: hsl(var(--destructive) / 0.1);
   border-radius: 0.5rem;
+  text-align: center;*/
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: #721c24;
+  background-color: #f8d7da;
+  border-radius: 0.5rem;
   text-align: center;
+  width: 100%;
+  max-width: 320px;
+}
+
+.field-error-msg {
+  font-size: 0.55rem;       /* Μικρά γράμματα (12px) */
+  color: #540505;           /* Ένα ωραίο καθαρό κόκκινο */
+  margin-top: -0.2rem;      /* Λίγη απόσταση από το κουτάκι */
+  margin-left: 0.2rem;      /* Στοίχιση λίγο δεξιά για να μην κολλάει στην άκρη */
+  font-weight: 300;         /* Λίγο έντονο για να διαβάζεται */
 }
 
 .login-button {
   width: 100%;
   max-width: 320px; /* match input width */
   min-height: 44px; /* match input height */
+
+  display: block; 
+  margin-left: auto;
+  margin-right: auto;
+  
   padding: 0.5rem 0.75rem; /* slightly flatter */
   font-size: 1rem;
   font-weight: 600;
   color: #ffffff;
-  background-color: #0d6efd; /* Blue */
+  background-color: #6e1c09;       /* #008080; /*#0d6efd; Blue */
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
@@ -104,7 +135,7 @@
 }
 
 .login-button:hover:not(:disabled) {
-  background-color: #0b5ed7; /* Darker blue on hover */
+  background-color: #4a1005;  /* #0b5ed7; Darker blue on hover */
 }
 
 .login-button:active:not(:disabled) {

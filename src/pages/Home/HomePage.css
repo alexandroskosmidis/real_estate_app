@@ -1,71 +1,398 @@
-.property-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
+
 .home-layout {
   display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: 1rem;
+  grid-template-columns: 1fr 250px; 
+  gap: 2rem;
   align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
+.home-hero {
+  background: linear-gradient(135deg, #f5e9e8, #ffffff);
+  border-bottom: 1px solid #e0e0e0;
+  padding: 1rem 1rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.hero-cta {
+  margin-top: 2rem;
+}
+
+.home-hero-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 2rem;
+  color: #333;
+}
+
+.home-hero-subtitle {
+  color: #666;
+  margin: 0;
+}
+
+/* --- ΤΟ ΚΟΥΤΙ ΤΩΝ ΦΙΛΤΡΩΝ --- */
+.filters-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
+  /* Αυτό πιάνει όλο το πλάτος πάνω από τη λίστα και το sidebar αν θες, 
+     αλλιώς πρέπει να αλλάξουμε το HTML layout. 
+     Τώρα είναι μέσα στη ροή της κύριας στήλης. */
+}
+
+/* ΓΡΑΜΜΗ 1: Purpose (Κέντρο ή Αριστερά) */
+.filter-row-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filter-label-top {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Toggle Buttons (Buy / Rent) */
+.toggle-group {
+  display: flex;
+  gap: 0.5rem;
+  background-color: #f5f5f5;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.toggle-btn {
+  border: none;
+  background: transparent;
+  padding: 8px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #666;
+  transition: all 0.2s ease;
+}
+
+.toggle-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.toggle-btn.active {
+  background-color: #6e1c09; /* Κεραμιδί */
+  color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.filter-divider {
+  border: 0;
+  border-top: 1px solid #eee;
+  margin: 1rem 0;
+}
+
+/* ΓΡΑΜΜΗ 2: Grid για τα Inputs */
+.filter-row-bottom {
+  display: flex;
+  flex-wrap: wrap; /* Αν δεν χωράνε, πάνε από κάτω */
+  gap: 1.5rem;
+  align-items: flex-end; /* Στοίχιση κάτω για να ταιριάζουν με το κουμπί Search */
+}
+
+.filter-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.filter-item label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #555;
+}
+
+/* Inputs styling (ίδιο με Create Property) */
+.filter-input {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fffafa;
+  color: #605a5a;
+  font-size: 0.95rem;
+  min-width: 140px;
+}
+
+.filter-input.small {
+  min-width: 70px; /* Πιο μικρά για τα Min/Max */
+  width: 80px;
+}
+
+.range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Κουμπιά Action (Search / Reset) */
+.filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: auto; /* Σπρώχνει τα κουμπιά τέρμα δεξιά */
+}
+
+.search-btn {
+  background-color: #6e1c09;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.2s;
+  height: 40px; /* Ίδιο ύψος με τα inputs */
+}
+
+.search-btn:hover {
+  background-color: #4a1005;
+}
+
+.reset-link {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 5px;
+}
+
+.reset-link:hover {
+  color: #d32f2f;
+}
+
+/* --- Sidebar --- */
 .home-sidebar {
-  background-color: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  border-radius: var(--radius);
-  padding: 1rem;
-  box-shadow: 0 4px 24px hsl(var(--foreground) / 0.06);
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
   position: sticky;
   top: 1rem;
 }
 
 .upload-button {
   width: 100%;
-  background-color: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
-  border: 1px solid hsl(var(--ring));
-  padding: 0.6rem 1rem;
-  border-radius: 0.45rem;
+  background-color: #6e1c09;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 6px;
   cursor: pointer;
+  font-weight: 600;
 }
 
-.home-hero {
-  background: linear-gradient(135deg, hsl(var(--primary) / 0.12), hsl(var(--accent) / 0.5));
-  border: 1px solid hsl(var(--border));
-  border-radius: var(--radius);
-  padding: 2rem;
-  margin-bottom: 1.25rem;
-  text-align: left;
-}
-
-.home-hero-title {
-  margin: 0 0 0.5rem 0;
-  font-size: 1.75rem;
-}
-
-.home-hero-subtitle {
-  margin: 0;
-  color: hsl(var(--muted-foreground));
-}
-
-.home-hero-actions {
-  margin-top: 1rem;
+/* --- Property List --- */
+.property-list {
   display: flex;
-  gap: 0.5rem;
+  flex-direction: column;
 }
 
-.home-hero-button {
-  background-color: hsl(var(--primary));
-  color: hsl(var(--primary-foreground));
-  border: 1px solid hsl(var(--ring));
-  padding: 0.5rem 0.9rem;
-  border-radius: 0.45rem;
+.property-list .property-card {
+  width: 100%;
+  max-width: 900px; 
+}
+
+.results-info {
+  margin-bottom: 1rem;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .home-layout {
+    grid-template-columns: 1fr; 
+  }
+  
+  .filter-row-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .filter-actions {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .search-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* --- Price Range Slider --- */
+.price-slider-container {
+  width: 100%;
+  padding: 0 5px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+
+.rc-slider-track {
+  background-color: #6e1c09 ; 
+  height: 4px ;
+  border-radius: 2px;
+}
+
+.rc-slider-rail {
+  background-color: #e0e0e0;
+  height: 4px; 
+  border-radius: 2px;
+}
+
+.rc-slider-handle {
+  border: 2px solid #6e1c09;
+  background-color: #fff ;
+  opacity: 1;
+  height: 16p;
+  width: 16px;
+  margin-top: -6px; 
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2) ;
+  cursor: grab ;
+  transition: all 0.2s ease; 
+}
+
+.rc-slider-handle:active {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 4px rgba(110, 28, 9, 0.1);
+  cursor: grabbing ;
+}
+
+
+.slider-tooltip {
+  position: absolute;
+  top: 25px;
+  /*bottom: 28px;*/
+  left: 50%;
+  transform: translateX(-50%); /*translateY(10px); */
+  
+  background-color: #333; 
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+
+  opacity: 0; 
+  visibility: hidden;
+  transition: all 0.2s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.slider-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  /*top: 100%;*/
+  left: 50%;
+  margin-left: -4px;
+  border-width: 4px;
+  border-style: solid;
+  border-color:  transparent transparent #333 transparent;
+}
+
+
+.rc-slider-handle:hover .slider-tooltip,
+.rc-slider-handle:active .slider-tooltip,
+.rc-slider-handle-dragging .slider-tooltip {
+  opacity: 1;
+  visibility: visible;
+  /*transform: translateX(-50%) translateY(0); */
+}
+
+.large-upload-btn {
+  background-color: #6e1c09; /* Κεραμιδί */
+  color: white;
+  border: none;
+  
+  /* Μεγεθύνσεις */
+  padding: 1rem 2.5rem;   /* Πιο "παχύ" κουμπί */
+  font-size: 1.1rem;      /* Μεγαλύτερα γράμματα */
+  font-weight: 700;       /* Πιο έντονα */
+  
+  border-radius: 50px;    /* Στρογγυλεμένο (pill shape) για μοντέρνο look */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(110, 28, 9, 0.3); /* Ωραία σκιά από κάτω */
+}
+
+/* Hover Effect: Σηκώνεται λίγο και μεγαλώνει η σκιά */
+.large-upload-btn:hover {
+  background-color: #5a1205;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(110, 28, 9, 0.4);
+}
+
+.large-upload-btn:active {
+  transform: translateY(-1px);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 0; 
+}
+
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #333;
   cursor: pointer;
 }
 
-.home-hero-button.secondary {
-  background-color: hsl(var(--secondary));
-  color: hsl(var(--foreground));
-  border: 1px solid hsl(var(--border));
+.logo-icon {
+  color: #6e1c09; 
+  font-size: 1.6rem;
+}
+
+/* Upload Button στο Header */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  align-self: right;
+}
+.nav-upload-btn {
+  background-color: #6e1c09;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.nav-upload-btn:hover {
+  background-color: #4a1005;
 }
