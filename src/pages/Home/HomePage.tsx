@@ -270,12 +270,7 @@ export default function HomePage() {
           {filteredProperties.length === 0 && <p>No properties found.</p>}
         </div>
 
-        <aside className="home-sidebar">
-           <h3 style={{marginTop:0}}>Actions</h3>
-           <Link to="/property/create">
-            <button className="upload-button">Upload Property</button>
-           </Link>
-        </aside>
+       
       </div>
   );
 }

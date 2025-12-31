@@ -68,7 +68,7 @@ return (
           </div>
           <div className="feature-item">
             <FontAwesomeIcon icon={faKey} />
-            <span>{isSale ? 'Πώληση' : 'Ενοικίαση'}</span>
+            <span>{isSale ? 'Buy' : 'Rent'}</span>
           </div>
         </div>
 

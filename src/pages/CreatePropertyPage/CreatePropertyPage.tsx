@@ -4,6 +4,7 @@ import {
   uploadPropertyPhoto
 } from "../../services/propertyService";
 import { fetchAmenities } from "../../services/amenityService";
+import './CreatePropertyPage.css';
 
 type CreatePropertyForm = {
   purpose: "sale" | "rent";
@@ -145,82 +146,190 @@ export default function CreatePropertyPage() {
   // Render
   // -----------------------------
   return (
-    <div style={{ maxWidth: 600, margin: "0 auto" }}>
-      <h2>Create Property</h2>
+    <div className="create-property-page">
+      <div className="create-card">
+        <h2 className="page-title">Create New Property</h2>
+    
+        {error && <p className="error-message">{error}</p>}
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+        <form onSubmit={submit} className="property-form">
+          
+          <div className="form-grid">
+            {/* Row 1: Purpose & Price */}
+            <div className="form-group">
+              <label>Purpose</label>
+              <select 
+                className="form-select"
+                value={form.purpose}
+                onChange={e => updateField("purpose", e.target.value as "sale" | "rent")}
+              >
+                <option value="sale">For Sale</option>
+                <option value="rent">For Rent</option>
+              </select>
+            </div>
 
-      <form onSubmit={submit}>
-        <input placeholder="Square meters" value={form.square_meters}
-          onChange={e => updateField("square_meters", e.target.value)} />
+            <div className="form-group">
+              <label>Date Available</label>
+              <input 
+                type="date"
+                className="form-input"
+                value={form.creation_date}
+                onChange={e => updateField("creation_date", e.target.value)} 
+              />
+            </div>
 
-        <input placeholder="Price" value={form.price}
-          onChange={e => updateField("price", e.target.value)} />
+            <div className="form-group">
+              <label>Price (€)</label>
+              <input 
+                className="form-input"
+                placeholder="e.g. 250000" 
+                value={form.price}
+                onChange={e => updateField("price", e.target.value)} 
+              />
+            </div>
 
-        <input type="date" value={form.creation_date}
-          onChange={e => updateField("creation_date", e.target.value)} />
+            {/* Row 2: Size & Rooms */}
+            <div className="form-group">
+              <label>Size (sqm)</label>
+              <input 
+                className="form-input"
+                placeholder="e.g. 95" 
+                value={form.square_meters}
+                onChange={e => updateField("square_meters", e.target.value)} 
+              />
+            </div>
 
-        <input placeholder="Rooms" value={form.rooms}
-          onChange={e => updateField("rooms", e.target.value)} />
+            <div className="form-group">
+              <label>Rooms</label>
+              <input 
+                className="form-input"
+                placeholder="e.g. 3" 
+                value={form.rooms}
+                onChange={e => updateField("rooms", e.target.value)} 
+              />
+            </div>
 
-        <input placeholder="Floor" value={form.floor}
-          onChange={e => updateField("floor", e.target.value)} />
+            {/* Row 3: Floor & City */}
+            <div className="form-group">
+              <label>Floor</label>
+              <input 
+                className="form-input"
+                placeholder="e.g. 2" 
+                value={form.floor}
+                onChange={e => updateField("floor", e.target.value)} 
+              />
+            </div>
+             
+            <div></div>
+            <div></div>
 
-        <input placeholder="City" value={form.city}
-          onChange={e => updateField("city", e.target.value)} />
+            <div className="form-group">
+              <label>City</label>
+              <input 
+                className="form-input"
+                placeholder="City" 
+                value={form.city}
+                onChange={e => updateField("city", e.target.value)} 
+              />
+            </div>
 
-        <input placeholder="Area" value={form.area}
-          onChange={e => updateField("area", e.target.value)} />
+            {/* Row 4: Area & Postal Code */}
+            <div className="form-group">
+              <label>Area</label>
+              <input 
+                className="form-input"
+                placeholder="Area" 
+                value={form.area}
+                onChange={e => updateField("area", e.target.value)} 
+              />
+            </div>
 
-        <input placeholder="Address" value={form.address}
-          onChange={e => updateField("address", e.target.value)} />
+             <div className="form-group">
+              <label>Postal Code</label>
+              <input 
+                className="form-input"
+                placeholder="Postal Code" 
+                value={form.postal_code}
+                onChange={e => updateField("postal_code", e.target.value)} 
+              />
+            </div>
 
-        <input placeholder="Number" value={form.number}
-          onChange={e => updateField("number", e.target.value)} />
+            {/* Row 5: Address & Number */}
+            <div className="form-group" style={{ flex: 2 }}> {/* Πιο μεγάλο Address */}
+              <label>Address</label>
+              <input 
+                className="form-input"
+                placeholder="Street Name" 
+                value={form.address}
+                onChange={e => updateField("address", e.target.value)} 
+              />
+            </div>
 
-        <input placeholder="Postal code" value={form.postal_code}
-          onChange={e => updateField("postal_code", e.target.value)} />
+            <div className="form-group" style={{ flex: 1 }}>
+              <label>Number</label>
+              <input 
+                className="form-input"
+                placeholder="No." 
+                value={form.number}
+                onChange={e => updateField("number", e.target.value)} 
+              />
+            </div>
+          </div>
 
-        <h4>Amenities</h4>
-        {amenities.map(a => (
-          <label key={a}>
-            <input
-              type="checkbox"
-              checked={selectedAmenities.includes(a)}
-              onChange={e => toggleAmenity(a, e.target.checked)}
-            />
-            {a}
-          </label>
-        ))}
+          <hr className="divider" />
 
-        <input
-          placeholder="Other amenity"
-          value={otherAmenity}
-          onChange={e => setOtherAmenity(e.target.value)}
-        />
+          {/* Amenities Section */}
+          <div className="amenities-section">
+            <h4>Amenities</h4>
+            <div className="amenities-grid">
+              {amenities.map(a => (
+                <label key={a} className="amenity-checkbox">
+                  <input
+                    type="checkbox"
+                    checked={selectedAmenities.includes(a)}
+                    onChange={e => toggleAmenity(a, e.target.checked)}
+                  />
+                  {a}
+                </label>
+              ))}
+            </div>
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Creating..." : "Create Property"}
-        </button>
-      </form>
+            <div className="form-group full-width" style={{marginTop: '15px'}}>
+              <label>Other Amenity</label>
+              <input
+                className="form-input"
+                placeholder="Type to add custom amenity"
+                value={otherAmenity}
+                onChange={e => setOtherAmenity(e.target.value)}
+              />
+            </div>
+          </div>
 
-      {/* ---------- PHOTO UPLOAD ---------- */}
-      {propertyId && (
-        <>
-          <hr />
-          <h3>Upload Property Photo</h3>
-
-          <input
-            type="file"
-            accept="image/*"
-            onChange={e => setPhoto(e.target.files?.[0] || null)}
-          />
-
-          <button onClick={uploadPhoto} disabled={uploading}>
-            {uploading ? "Uploading..." : "Upload a photo"}
+          <button type="submit" disabled={loading} className="submit-btn">
+            {loading ? "Creating..." : "Create Property"}
           </button>
-        </>
-      )}
+        </form>
+
+        {/* ---------- PHOTO UPLOAD ---------- */}
+        {propertyId && (
+          <div className="photo-upload-section">
+            <hr className="divider" />
+            <h3>Upload Property Photo</h3>
+            
+            <div className="upload-box">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={e => setPhoto(e.target.files?.[0] || null)}
+                className="file-input"
+              />
+              <button onClick={uploadPhoto} disabled={uploading} className="upload-btn">
+                {uploading ? "Uploading..." : "Upload Photo"}
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

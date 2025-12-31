@@ -40,12 +40,9 @@
   padding: 1.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   margin-bottom: 2rem;
-  /* Αυτό πιάνει όλο το πλάτος πάνω από τη λίστα και το sidebar αν θες, 
-     αλλιώς πρέπει να αλλάξουμε το HTML layout. 
-     Τώρα είναι μέσα στη ροή της κύριας στήλης. */
+  
 }
 
-/* ΓΡΑΜΜΗ 1: Purpose (Κέντρο ή Αριστερά) */
 .filter-row-top {
   display: flex;
   align-items: center;
@@ -58,7 +55,6 @@
   color: #333;
 }
 
-/* Toggle Buttons (Buy / Rent) */
 .toggle-group {
   display: flex;
   gap: 0.5rem;
@@ -83,7 +79,7 @@
 }
 
 .toggle-btn.active {
-  background-color: #6e1c09; /* Κεραμιδί */
+  background-color: #6e1c09; 
   color: white;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
@@ -94,12 +90,11 @@
   margin: 1rem 0;
 }
 
-/* ΓΡΑΜΜΗ 2: Grid για τα Inputs */
 .filter-row-bottom {
   display: flex;
-  flex-wrap: wrap; /* Αν δεν χωράνε, πάνε από κάτω */
+  flex-wrap: wrap; 
   gap: 1.5rem;
-  align-items: flex-end; /* Στοίχιση κάτω για να ταιριάζουν με το κουμπί Search */
+  align-items: flex-end; 
 }
 
 .filter-item {
@@ -114,7 +109,6 @@
   color: #555;
 }
 
-/* Inputs styling (ίδιο με Create Property) */
 .filter-input {
   padding: 0.6rem;
   border: 1px solid #ccc;
@@ -126,7 +120,7 @@
 }
 
 .filter-input.small {
-  min-width: 70px; /* Πιο μικρά για τα Min/Max */
+  min-width: 70px; 
   width: 80px;
 }
 
@@ -136,12 +130,11 @@
   gap: 0.5rem;
 }
 
-/* Κουμπιά Action (Search / Reset) */
 .filter-actions {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-left: auto; /* Σπρώχνει τα κουμπιά τέρμα δεξιά */
+  margin-left: auto; 
 }
 
 .search-btn {
@@ -156,7 +149,7 @@
   align-items: center;
   gap: 0.5rem;
   transition: background 0.2s;
-  height: 40px; /* Ίδιο ύψος με τα inputs */
+  height: 40px; 
 }
 
 .search-btn:hover {
@@ -176,7 +169,7 @@
   color: #d32f2f;
 }
 
-/* --- Sidebar --- */
+
 .home-sidebar {
   background-color: #fff;
   border: 1px solid #e0e0e0;
@@ -197,7 +190,6 @@
   font-weight: 600;
 }
 
-/* --- Property List --- */
 .property-list {
   display: flex;
   flex-direction: column;
@@ -214,7 +206,6 @@
   font-size: 0.95rem;
 }
 
-/* --- Responsive --- */
 @media (max-width: 900px) {
   .home-layout {
     grid-template-columns: 1fr; 
@@ -236,7 +227,6 @@
   }
 }
 
-/* --- Price Range Slider --- */
 .price-slider-container {
   width: 100%;
   padding: 0 5px;
@@ -283,7 +273,7 @@
   top: 25px;
   /*bottom: 28px;*/
   left: 50%;
-  transform: translateX(-50%); /*translateY(10px); */
+  transform: translateX(-50%); 
   
   background-color: #333; 
   color: white;
@@ -322,22 +312,19 @@
 }
 
 .large-upload-btn {
-  background-color: #6e1c09; /* Κεραμιδί */
+  background-color: #6e1c09;
   color: white;
   border: none;
   
-  /* Μεγεθύνσεις */
-  padding: 1rem 2.5rem;   /* Πιο "παχύ" κουμπί */
-  font-size: 1.1rem;      /* Μεγαλύτερα γράμματα */
-  font-weight: 700;       /* Πιο έντονα */
-  
-  border-radius: 50px;    /* Στρογγυλεμένο (pill shape) για μοντέρνο look */
+  padding: 1rem 2.5rem;   
+  font-size: 1.1rem;      
+  font-weight: 700;       
+  border-radius: 50px;   
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(110, 28, 9, 0.3); /* Ωραία σκιά από κάτω */
+  box-shadow: 0 4px 15px rgba(110, 28, 9, 0.3); 
 }
 
-/* Hover Effect: Σηκώνεται λίγο και μεγαλώνει η σκιά */
 .large-upload-btn:hover {
   background-color: #5a1205;
   transform: translateY(-3px);
