@@ -11,6 +11,8 @@ import PropertyCard from '../../components/PropertyCard/PropertyCard';
 import 'rc-slider/assets/index.css';
 import './HomePage.css';
 
+import UserMenu from '../../components/UserMenu/UserMenu'; // <--- ΝΕΟ IMPORT
+
 type Filters = {
   purpose: 'sale' | 'rent' | 'all';
   city: string;
@@ -126,6 +128,12 @@ export default function HomePage() {
             </div>
             <span className="logo-text">RealEstate<span style={{color: '#6e1c09'}}>App</span></span>
           </div>
+
+          <div className="navbar-actions">
+           <UserMenu /> 
+          </div>
+
+
         </nav>
 
         <section className="home-hero">

@@ -19,7 +19,7 @@ if (!$username || !$password) {
 }
 
 // Προσοχή: προσωρινά απλό login (ΧΩΡΙΣ hash)
-$sql = "SELECT user_id, name, role FROM User 
+$sql = "SELECT user_id, name, email, phone, role FROM User 
         WHERE name = ? AND password = ?";
 
 $stmt = mysqli_prepare($con, $sql);
