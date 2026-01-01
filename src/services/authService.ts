@@ -25,3 +25,33 @@ export const login = async (
 
   return res.json();
 };
+
+
+// Signup 
+
+export type SignUpData = {
+  username: string;
+  password: string;
+  email: string;
+  phone: string;
+//  role: 'renter' | 'seller' | 'both';
+};
+
+
+export const signup = async (userData: SignUpData) => {
+  try {
+    const response = await fetch( "https://dblab.nonrelevant.net/~lab2526omada2/backend/api/auth/signup.php", { 
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Signup error:", error);
+    return { success: false, message: "Network error during signup" };
+  }
+};

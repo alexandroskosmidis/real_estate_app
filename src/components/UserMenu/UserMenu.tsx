@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserCircle, faRightFromBracket, faPhone, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUserCircle, faRightFromBracket, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import './UserMenu.css';
 
 type User = {
@@ -96,11 +96,7 @@ export default function UserMenu() {
           <hr className="dropdown-divider" />
 
           <ul className="dropdown-list">
-            <li>
-              <button className="dropdown-item">
-                <FontAwesomeIcon icon={faUser} /> My Profile
-              </button>
-            </li>
+
             <li>
               <button className="dropdown-item logout" onClick={handleLogout}>
                 <FontAwesomeIcon icon={faRightFromBracket} /> Logout
