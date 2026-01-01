@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import './SendMessagePage.css';
 import PropertyCard from '../../components/PropertyCard/PropertyCard';
 import type { Property } from '../../components/PropertyCard/Property.types';
 import { sendMessage } from '../../services/messageService';
@@ -40,7 +41,7 @@ export default function SendMessagePage() {
   };
 
   return (
-    <div style={{ maxWidth: 800, margin: '0 auto' }}>
+    <div className="send-message-container">
       <h2>Επικοινωνία με τον ιδιοκτήτη</h2>
 
       <PropertyCard property={property} />
@@ -50,7 +51,7 @@ export default function SendMessagePage() {
         value={content}
         onChange={(e) => setContent(e.target.value)}
         rows={5}
-        style={{ width: '100%', marginTop: 16 }}
+        className="send-message-textarea"
       />
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
@@ -58,9 +59,9 @@ export default function SendMessagePage() {
       <button
         onClick={handleSend}
         disabled={loading}
-        style={{ marginTop: 12 }}
+        className="send-message-button"
       >
-        {loading ? 'Sending...' : 'Send to owner'}
+        {loading ? 'Sending...' : 'Sent to owner'}
       </button>
     </div>
   );

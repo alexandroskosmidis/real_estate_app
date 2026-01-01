@@ -1,0 +1,30 @@
+.send-message-container {
+  max-width: 800px;
+  margin: 0 auto;
+  color: #6e1c09; /* requested text color for enclosure */
+}
+
+.send-message-textarea {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.send-message-button {
+  margin-top: 12px;
+  background-color: #6e1c09; /* match requested color */
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.send-message-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.send-message-button:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
