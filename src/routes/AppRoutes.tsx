@@ -5,6 +5,7 @@ import LoginPage from '../pages/LoginPage/LoginPage';
 import HomePage from '../pages/Home/HomePage';
 import PropertyDetailPage from '../pages/PropertyDetail/PropertyDetailPage';
 import CreatePropertyPage from '../pages/CreatePropertyPage/CreatePropertyPage';
+import GetMessagePage from '../pages/GetMessagePage/GetMessagePage';
 
 
 const AppRoutes = () => {
@@ -16,6 +17,7 @@ const AppRoutes = () => {
         <Route path="/home" element={<HomePage />} />
         <Route path="/property/:id" element={<PropertyDetailPage />} />
         <Route path="/property/create" element={<CreatePropertyPage />} />
+        <Route path="/messages" element={<GetMessagePage />} />
       </Routes>
     </BrowserRouter>
   );

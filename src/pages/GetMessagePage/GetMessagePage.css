@@ -1,0 +1,112 @@
+.messages-page {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 85vh; /* Για να πιάνει όλη την οθόνη */
+  display: flex;
+  flex-direction: column;
+}
+
+.page-title {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.messages-container {
+  display: flex;
+  flex: 1; /* Γεμίζει το υπόλοιπο ύψος */
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* --- ΑΡΙΣΤΕΡΗ ΣΤΗΛΗ (ΛΙΣΤΑ) --- */
+.messages-list {
+  width: 35%;
+  border-right: 1px solid #e0e0e0;
+  overflow-y: auto; /* Scroll αν έχει πολλά μηνύματα */
+  background-color: #f9f9f9;
+}
+
+.message-card {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.message-card:hover { background-color: #f0f0f0; }
+.message-card.active { background-color: #e3f2fd; border-left: 4px solid #1976d2; }
+
+.msg-header {
+  display: flex; justify-content: space-between; margin-bottom: 5px;
+}
+.msg-sender { font-weight: 700; color: #333; }
+.msg-date { font-size: 0.8rem; color: #888; }
+.msg-property { font-size: 0.85rem; color: #6e1c09; margin-bottom: 6px; }
+.msg-preview { font-size: 0.9rem; color: #666; margin: 0; }
+
+/* --- ΔΕΞΙΑ ΣΤΗΛΗ (ΛΕΠΤΟΜΕΡΕΙΕΣ) --- */
+.message-detail {
+  width: 65%;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+.detail-header {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;
+}
+.detail-date { color: #888; font-size: 0.9rem; }
+
+.property-ref-badge {
+  background-color: #fff3e0; color: #e65100;
+  padding: 8px 12px; border-radius: 6px;
+  display: inline-block; margin-bottom: 20px; font-size: 0.9rem;
+}
+
+.sender-info p { margin: 5px 0; color: #555; }
+
+.full-message-body {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+  white-space: pre-wrap; /* Για να κρατάει τις αλλαγές γραμμής */
+}
+
+/* Κενή κατάσταση */
+.empty-selection {
+  height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  color: #ccc;
+}
+.empty-icon { font-size: 4rem; margin-bottom: 15px; }
+
+
+.empty-messages-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border: 1px dashed #ccc;
+  border-radius: 12px;
+  padding: 50px;
+  margin-top: 20px;
+  text-align: center;
+  color: #666;
+}
+
+.empty-icon-large {
+  font-size: 4rem;
+  color: #ddd;
+  margin-bottom: 20px;
+}
+
+.empty-messages-container h3 {
+  color: #444;
+  margin-bottom: 10px;
+}

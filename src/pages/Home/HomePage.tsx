@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo } from "react";
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faSearch, faRotateLeft } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faSearch, faRotateLeft, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import Slider from 'rc-slider';
 
 import type { Property } from "../../components/PropertyCard/Property.types";
@@ -11,7 +11,8 @@ import PropertyCard from '../../components/PropertyCard/PropertyCard';
 import 'rc-slider/assets/index.css';
 import './HomePage.css';
 
-import UserMenu from '../../components/UserMenu/UserMenu'; // <--- ΝΕΟ IMPORT
+import UserMenu from '../../components/UserMenu/UserMenu';
+import { useNavigate } from 'react-router-dom';
 
 type Filters = {
   purpose: 'sale' | 'rent' | 'all';
@@ -115,6 +116,10 @@ export default function HomePage() {
     setAppliedFilters(initialFilters);
   };
 
+  const user = JSON.parse(localStorage.getItem('user') || 'null');
+  const isOwner = user && (user.role === 'seller' || user.role === 'both');
+  const navigate = useNavigate();
+
 
   if (loading) return <p>Loading properties...</p>;
   if (error) return <p>{error}</p>;
@@ -129,7 +134,16 @@ export default function HomePage() {
             <span className="logo-text">RealEstate<span style={{color: '#6e1c09'}}>App</span></span>
           </div>
 
-          <div className="navbar-actions">
+          <div className="navbar-actions" style={{display: 'flex', alignItems: 'center', gap: '15px'}}>
+            {isOwner && (
+              <button 
+                onClick={() => navigate('/messages')} 
+                style={{background: 'none', border: 'none', cursor: 'pointer', color: '#555', fontSize: '1.2rem'}}
+                title="My Messages"
+              >
+                <FontAwesomeIcon icon={faEnvelope} />
+              </button>
+            )}
            <UserMenu /> 
           </div>
 
