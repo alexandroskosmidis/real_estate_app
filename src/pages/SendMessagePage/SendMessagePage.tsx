@@ -8,6 +8,7 @@ export default function SendMessagePage() {
   const location = useLocation();
   type PropertyLocationState = { property: Property };
   const property = (location.state as PropertyLocationState).property;
+  const user = JSON.parse(localStorage.getItem("user")!);
 
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
@@ -26,6 +27,7 @@ export default function SendMessagePage() {
       await sendMessage({
         content,
         property_id: property.property_id,
+        sender_id: user.user_id,
       });
 
       alert('Message sent successfully');

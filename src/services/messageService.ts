@@ -1,6 +1,7 @@
 type SendMessagePayload = {
   content: string;
   property_id: number;
+    sender_id: number;
 };
 
 export async function sendMessage(data: SendMessagePayload) {
@@ -8,7 +9,6 @@ export async function sendMessage(data: SendMessagePayload) {
     "https://dblab.nonrelevant.net/~lab2526omada2/backend/api/messages/send_message.php",
     {
       method: "POST",
-      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

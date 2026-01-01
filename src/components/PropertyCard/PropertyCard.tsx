@@ -127,15 +127,15 @@ export default function PropertyCard({ property }: Props) {
             )}
           </div>
         </div>
-
-        {/* ✅ SEND MESSAGE BUTTON */}
-        <button
-          className="send-message-btn"
-          onClick={handleSendMessage}
-        >
-          Send a Message
-        </button>
       </div>
+
+      {/* ✅ SEND MESSAGE BUTTON (top-right) */}
+      <button
+        className="send-message-btn"
+        onClick={handleSendMessage}
+      >
+        Send a Message
+      </button>
     </div>
   );
 }

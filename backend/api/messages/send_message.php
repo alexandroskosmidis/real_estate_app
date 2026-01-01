@@ -1,12 +1,17 @@
 <?php
 header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Content-Type: application/json");
 
-session_start();
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
 
-// ---------- DEBUG LOG ----------
+require_once "../../config/database.php";
+
+// ---------- DEBUG ----------
 $logFile = __DIR__ . "/debug_send_message.log";
 function log_debug($msg) {
     global $logFile;
@@ -19,107 +24,71 @@ function log_debug($msg) {
 
 log_debug("=== SEND MESSAGE CALLED ===");
 
-// ---------- PREFLIGHT ----------
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
-    exit;
-}
+$data = json_decode(file_get_contents("php://input"), true);
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(["error" => "Method not allowed"]);
-    exit;
-}
+$sender_id   = $data['sender_id'] ?? null;
+$property_id = $data['property_id'] ?? null;
+$content     = trim($data['content'] ?? '');
 
-require_once "../../config/database.php";
-
-if (!isset($_SESSION['user_id'])) {
-  http_response_code(401);
-  echo json_encode(["error" => "Not authenticated"]);
-  exit;
-}
-
-$sender_id = (int)$_SESSION['user_id'];
-
-// ---------- READ JSON ----------
-$raw = file_get_contents("php://input");
-log_debug("RAW INPUT: " . $raw);
-
-$data = json_decode($raw, true);
-
-if (!$data || empty($data['content']) || empty($data['property_id'])) {
-    log_debug("ERROR: Invalid payload");
+if (!$sender_id || !$property_id || !$content) {
+    log_debug("ERROR: Missing fields");
     http_response_code(400);
-    echo json_encode(["error" => "Invalid request data"]);
+    echo json_encode(["error" => "Missing fields"]);
     exit;
 }
 
-$content = trim($data['content']);
-$property_id = (int)$data['property_id'];
+// ---------- FIND RECEIVER (OWNER) ----------
+$stmt = mysqli_prepare($con, "
+    SELECT owner_id
+    FROM Property
+    WHERE property_id = ?
+");
+mysqli_stmt_bind_param($stmt, "i", $property_id);
+mysqli_stmt_execute($stmt);
+$res = mysqli_stmt_get_result($stmt);
 
-try {
-
-    // ================== FIND OWNER ==================
-    log_debug("Finding property owner...");
-
-    $stmt = mysqli_prepare($con, "
-        SELECT owner_id 
-        FROM Property 
-        WHERE property_id = ?
-    ");
-    mysqli_stmt_bind_param($stmt, "i", $property_id);
-    mysqli_stmt_execute($stmt);
-    $res = mysqli_stmt_get_result($stmt);
-
-    if (!$row = mysqli_fetch_assoc($res)) {
-        throw new Exception("Property not found");
-    }
-
-    $receiver_id = (int)$row['owner_id'];
-    log_debug("Receiver ID: $receiver_id");
-
-    // ================== NEXT MESSAGE ID ==================
-    $r = mysqli_query(
-        $con,
-        "SELECT COALESCE(MAX(message_id),0)+1 AS next_id FROM Message"
-    );
-    $message_id = mysqli_fetch_assoc($r)['next_id'];
-
-    // ================== INSERT MESSAGE ==================
-    $stmt = mysqli_prepare($con, "
-        INSERT INTO Message
-        (message_id, content, sent_at, sender_id, receiver_id, property_id)
-        VALUES (?, ?, NOW(), ?, ?, ?)
-    ");
-
-    mysqli_stmt_bind_param(
-        $stmt,
-        "isiii",
-        $message_id,
-        $content,
-        $sender_id,
-        $receiver_id,
-        $property_id
-    );
-
-    if (!mysqli_stmt_execute($stmt)) {
-        throw new Exception(mysqli_error($con));
-    }
-
-    log_debug("Message inserted: ID = $message_id");
-
-    echo json_encode([
-        "success" => true,
-        "message_id" => $message_id
-    ]);
-
-} catch (Exception $e) {
-
-    log_debug("ERROR: " . $e->getMessage());
-
-    http_response_code(500);
-    echo json_encode([
-        "error" => "Failed to send message",
-        "details" => $e->getMessage()
-    ]);
+$row = mysqli_fetch_assoc($res);
+if (!$row) {
+    log_debug("ERROR: Property not found");
+    http_response_code(404);
+    echo json_encode(["error" => "Property not found"]);
+    exit;
 }
+
+$receiver_id = $row['owner_id'];
+
+// ---------- NEXT MESSAGE ID ----------
+$r = mysqli_query($con, "SELECT COALESCE(MAX(message_id), 0) + 1 AS next_id FROM `Message`");
+$row = mysqli_fetch_assoc($r);
+$message_id = (int)$row['next_id'];
+
+log_debug("Next message_id = $message_id");
+
+// ---------- INSERT MESSAGE ----------
+$stmt = mysqli_prepare($con, "
+    INSERT INTO Message
+    (message_id, sender_id, receiver_id, property_id, content, sent_at)
+    VALUES (?, ?, ?, ?, ?, NOW())
+");
+
+mysqli_stmt_bind_param(
+    $stmt,
+    "iiiis",
+    $message_id,
+    $sender_id,
+    $receiver_id,
+    $property_id,
+    $content
+);
+
+if (!mysqli_stmt_execute($stmt)) {
+    log_debug("MYSQL ERROR: " . mysqli_error($con));
+    http_response_code(500);
+    echo json_encode(["error" => "Insert failed"]);
+    exit;
+}
+
+
+log_debug("MESSAGE SENT from $sender_id to $receiver_id");
+
+echo json_encode(["success" => true]);
