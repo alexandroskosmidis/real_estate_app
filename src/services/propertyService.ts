@@ -1,8 +1,7 @@
 import type { Property } from "../components/PropertyCard/Property.types";
 import type { CreatePropertyPayload } from "../pages/CreatePropertyPage/property.types";
-
-const API_BASE =
-  "https://dblab.nonrelevant.net/~lab2526omada2/backend/api/properties";
+import { API_BASE as API_ROOT } from "../config/api";
+const API_BASE = `${API_ROOT}/properties`;
 
 // -----------------------------
 // FETCH PROPERTIES

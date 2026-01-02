@@ -1,3 +1,4 @@
+import { API_BASE } from "../config/api";
 export interface LoginResponse {
   success: boolean;
   user?: {
@@ -13,7 +14,7 @@ export const login = async (
   password: string
 ): Promise<LoginResponse> => {
   const res = await fetch(
-    "https://dblab.nonrelevant.net/~lab2526omada2/backend/api/auth/login.php",
+    `${API_BASE}/auth/login.php`,
     {
       method: "POST",
       headers: {
@@ -39,7 +40,7 @@ export type SignUpData = {
 
 export const signup = async (userData: SignUpData) => {
   try {
-    const response = await fetch( "https://dblab.nonrelevant.net/~lab2526omada2/backend/api/auth/signup.php", { 
+    const response = await fetch(`${API_BASE}/auth/signup.php`, { 
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

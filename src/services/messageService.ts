@@ -1,3 +1,4 @@
+import { API_BASE } from "../config/api";
 type SendMessagePayload = {
   content: string;
   property_id: number;
@@ -6,7 +7,7 @@ type SendMessagePayload = {
 
 export async function sendMessage(data: SendMessagePayload) {
   const res = await fetch(
-    "https://dblab.nonrelevant.net/~lab2526omada2/backend/api/messages/send_message.php",
+    `${API_BASE}/messages/send_message.php`,
     {
       method: "POST",
       headers: {
