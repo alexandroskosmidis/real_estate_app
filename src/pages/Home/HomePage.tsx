@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo } from "react";
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faSearch, faRotateLeft } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faSearch, faRotateLeft, faFolder } from '@fortawesome/free-solid-svg-icons';
 import Slider from 'rc-slider';
 
 import type { Property } from "../../components/PropertyCard/Property.types";
@@ -10,7 +10,7 @@ import { fetchProperties } from "../../services/propertyService";
 import PropertyCard from '../../components/PropertyCard/PropertyCard';
 import 'rc-slider/assets/index.css';
 import './HomePage.css';
-import { faInbox } from "@fortawesome/free-solid-svg-icons";
+// removed faInbox, using folder icon
 
 import UserMenu from '../../components/UserMenu/UserMenu'; // <--- ΝΕΟ IMPORT
 
@@ -130,8 +130,8 @@ export default function HomePage() {
             <span className="logo-text">RealEstate<span style={{color: '#6e1c09'}}>App</span></span>
           </div>
           <div className="navbar-actions">
-            <Link to="/my-messages" className="inbox-icon">
-              <FontAwesomeIcon icon={faInbox} />
+            <Link to="/my-messages" className="messages-button" aria-label="My Messages">
+              <FontAwesomeIcon icon={faFolder} />
             </Link>
             <UserMenu />
           </div>
