@@ -10,6 +10,7 @@ import { fetchProperties } from "../../services/propertyService";
 import PropertyCard from '../../components/PropertyCard/PropertyCard';
 import 'rc-slider/assets/index.css';
 import './HomePage.css';
+import { faInbox } from "@fortawesome/free-solid-svg-icons";
 
 import UserMenu from '../../components/UserMenu/UserMenu'; // <--- ΝΕΟ IMPORT
 
@@ -128,12 +129,12 @@ export default function HomePage() {
             </div>
             <span className="logo-text">RealEstate<span style={{color: '#6e1c09'}}>App</span></span>
           </div>
-
           <div className="navbar-actions">
-           <UserMenu /> 
+            <Link to="/my-messages" className="inbox-icon">
+              <FontAwesomeIcon icon={faInbox} />
+            </Link>
+            <UserMenu />
           </div>
-
-
         </nav>
 
         <section className="home-hero">

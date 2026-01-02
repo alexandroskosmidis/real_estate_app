@@ -6,6 +6,7 @@ import PropertyDetailPage from '../pages/PropertyDetail/PropertyDetailPage';
 import CreatePropertyPage from '../pages/CreatePropertyPage/CreatePropertyPage';
 import SendMessagePage from '../pages/SendMessagePage/SendMessagePage';
 import SignUpPage from '../pages/SignUpPage/SignupPage';
+import MyMessages from "../pages/MyMessages/MyMessages";
 
 
 const AppRoutes = () => {
@@ -18,6 +19,7 @@ const AppRoutes = () => {
         <Route path="/property/:id" element={<PropertyDetailPage />} />
         <Route path="/property/create" element={<CreatePropertyPage />} />
         <Route path="/properties/:id/message" element={<SendMessagePage />} />
+        <Route path="/my-messages" element={<MyMessages />} />
       </Routes>
     </BrowserRouter>
   );
