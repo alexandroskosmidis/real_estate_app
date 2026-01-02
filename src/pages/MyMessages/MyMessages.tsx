@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { fetchMyMessages } from "../../services/MyMessages";
 import MessageItem from "../../components/MessageItem/MessageItem";
 import type { Message } from "../../types/message.types";
+import "./MyMessages.css";
 
 export default function MyMessages() {
   const [messages, setMessages] = useState<Message[]>([]);
+  const [openId, setOpenId] = useState<number | null>(null);
 
   const user = JSON.parse(localStorage.getItem("user") || "null");
 
@@ -26,8 +28,27 @@ export default function MyMessages() {
 
       {messages.length === 0 && <p>No messages</p>}
 
-      {messages.map(msg => (
-        <MessageItem key={msg.message_id} message={msg} />
+      {messages.map((msg) => (
+        <div key={msg.message_id} className="message-preview">
+          <div className="preview-header">
+            <strong>{msg.sender.name}</strong>
+            <span className="preview-date">
+              {new Date(msg.sent_at).toLocaleDateString()}
+            </span>
+          </div>
+          <button
+            className="read-button"
+            onClick={() =>
+              setOpenId(openId === msg.message_id ? null : msg.message_id)
+            }
+          >
+            Read the Message
+          </button>
+
+          {openId === msg.message_id && (
+            <MessageItem message={msg} initialOpen={true} />
+          )}
+        </div>
       ))}
     </div>
   );

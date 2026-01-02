@@ -1,10 +1,11 @@
 import { useState } from "react";
 import type { Message } from "../../types/message.types";
+import "./MessageItem.css";
 
-type MessageItemProps = { message: Message };
+type MessageItemProps = { message: Message; initialOpen?: boolean };
 
-export default function MessageItem({ message }: MessageItemProps) {
-  const [open, setOpen] = useState(false);
+export default function MessageItem({ message, initialOpen = false }: MessageItemProps) {
+  const [open, setOpen] = useState(initialOpen);
 
   return (
     <div className="message-item" onClick={() => setOpen(!open)}>

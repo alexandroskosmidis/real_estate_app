@@ -1,0 +1,40 @@
+.my-messages-page {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 16px;
+}
+
+.message-preview {
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	padding: 12px;
+	margin-bottom: 12px;
+	background: #fff;
+}
+
+.preview-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.preview-date {
+	color: #888;
+	font-size: 0.85rem;
+}
+
+.read-button {
+	background-color: #6e1c09; /* requested color */
+	color: #ffffff;
+	border: none;
+	border-radius: 6px;
+	padding: 8px 12px;
+	font-size: 0.85rem;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.read-button:hover {
+	filter: brightness(1.05);
+}
