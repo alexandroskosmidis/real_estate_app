@@ -73,7 +73,7 @@ export default function Login() {
           {/* --- USERNAME GROUP --- */}
           <div className="input-group">
             <label htmlFor="email" className="input-label">
-              Email or Username
+              Username
             </label>
             <input
               className="input-field"
@@ -123,4 +123,3 @@ export default function Login() {
   );
 
 }
-
