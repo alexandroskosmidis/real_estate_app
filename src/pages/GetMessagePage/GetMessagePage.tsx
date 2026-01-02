@@ -19,9 +19,6 @@ export default function MessagesPage() {
   console.log("User ID being sent:", userId);
 
 
-
-
-
 //   useEffect(() => {
 //     if (user.user_id) {
 //       fetchMyMessages(user.user_id).then((data) => {
@@ -47,7 +44,7 @@ useEffect(() => {
 if (loading) {
     return (
       <div className="messages-page" style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
-        <p>Φόρτωση μηνυμάτων...</p>
+        <p>Messages Loading...</p>
       </div>
     );
   }
@@ -58,8 +55,9 @@ if (loading) {
         <h2 className="page-title">My Messages</h2>
         <div className="empty-messages-container">
            <FontAwesomeIcon icon={faEnvelopeOpenText} className="empty-icon-large" />
-           <h3>Δεν έχετε νέα μηνύματα</h3>
-           <p>Όταν κάποιος ενδιαφερθεί για τα ακίνητά σας, τα μηνύματα θα εμφανιστούν εδώ.</p>
+          <h3>You have no new messages</h3>
+          <p>When someone shows interest in your properties, the messages will appear here.</p>
+
         </div>
       </div>
     );
