@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { login } from '../../services/authService';
 import "./LoginPage.css";
 
@@ -113,6 +113,14 @@ export default function Login() {
             </div>
           )}
           <button type="submit" className="login-button">Login</button>
+
+          <div style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.95rem', color: '#666' }}>
+            Don't have an account?{' '}
+            <Link to="/signup" style={{ color: '#6e1c09', fontWeight: 'bold', textDecoration: 'none' }}>
+              Sign up
+            </Link>
+          </div>
+
         </form>
 
         <footer className="login-footer">
