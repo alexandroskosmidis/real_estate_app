@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 
 import LoginPage from '../pages/LoginPage/LoginPage';
 import HomePage from '../pages/Home/HomePage';
@@ -11,7 +11,7 @@ import MyMessages from "../pages/MyMessages/MyMessages";
 
 const AppRoutes = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
@@ -21,7 +21,7 @@ const AppRoutes = () => {
         <Route path="/properties/:id/message" element={<SendMessagePage />} />
         <Route path="/my-messages" element={<MyMessages />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
