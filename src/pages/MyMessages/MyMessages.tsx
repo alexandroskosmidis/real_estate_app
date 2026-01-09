@@ -2,21 +2,26 @@ import { useEffect, useState } from "react";
 import { fetchMyMessages } from "../../services/MyMessages";
 import MessageItem from "../../components/MessageItem/MessageItem";
 import type { Message } from "../../types/message.types";
+import PropertyCard from "../../components/PropertyCard/PropertyCard";
+
 import "./MyMessages.css";
+
 
 export default function MyMessages() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [openId, setOpenId] = useState<number | null>(null);
+  
 
   const user = JSON.parse(localStorage.getItem("user") || "null");
 
   useEffect(() => {
     if (!user) return;
 
-    fetchMyMessages(user.user_id)
+   fetchMyMessages(user.user_id)
       .then(setMessages)
       .catch(err => console.error(err));
   }, [user]);
+
 
   if (!user) {
     return <p>Please login to view your messages</p>;
@@ -46,7 +51,10 @@ export default function MyMessages() {
           </button>
 
           {openId === msg.message_id && (
-            <MessageItem message={msg} initialOpen={true} />
+             <div className="message-details">
+              <MessageItem message={msg} initialOpen={true} />
+              <PropertyCard property={msg.property} />
+            </div>
           )}
         </div>
       ))}
