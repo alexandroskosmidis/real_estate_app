@@ -121,7 +121,7 @@
 
 .filter-input.small {
   min-width: 70px; 
-  width: 80px;
+  width: 70px;
 }
 
 .range-inputs {
@@ -373,11 +373,11 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: #6e1c09; /* requested color */
+  background-color: #6e1c09; 
   color: #ffffff;
   text-decoration: none;
   border-radius: 10px;
-  padding: 0.6rem 1rem; /* slightly bigger */
+  padding: 0.6rem 1rem; 
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
@@ -386,7 +386,7 @@
 }
 
 .messages-button svg {
-  font-size: 1.1rem; /* make icon a bit bigger */
+  font-size: 1.1rem; 
 }
 .nav-upload-btn {
   background-color: #6e1c09;

@@ -12,7 +12,7 @@ import 'rc-slider/assets/index.css';
 import './HomePage.css';
 // removed faInbox, using folder icon
 
-import UserMenu from '../../components/UserMenu/UserMenu'; // <--- ΝΕΟ IMPORT
+import UserMenu from '../../components/UserMenu/UserMenu'; 
 
 type Filters = {
   purpose: 'sale' | 'rent' | 'all';
@@ -32,7 +32,7 @@ export default function HomePage() {
 
   // Αρχική κατάσταση φίλτρων
   const initialFilters: Filters = {
-    purpose: 'all', // Default επιλογή
+    purpose: 'all', 
     city: '',
     minPrice: '',
     maxPrice: '',
@@ -52,25 +52,24 @@ export default function HomePage() {
       .finally(() => setLoading(false));
   }, []);
 
-  // 1. Υπολογισμός μοναδικών περιοχών για το Dropdown
-  // (Ψάχνει όλα τα ακίνητα και βρίσκει ποιες περιοχές υπάρχουν)
+  // Υπολογισμός μοναδικών περιοχών 
   const uniqueCities = useMemo(() => {
     const cities = properties.map(p => p.city).filter(c => c);;
     return Array.from(new Set(cities)).sort(); 
   }, [properties]);
 
-
+  // Υπολογισμός ελάχιστης και μέγιστης τιμής για το slider
   const priceBounds = useMemo(() => {
     if (properties.length === 0) return { min: 0, max: 500000 }; 
     const prices = properties.map(p => p.price);
     return {
-        min: Math.min(...prices), // Η χαμηλότερη τιμή που βρέθηκε
-        max: Math.max(...prices)  // Η υψηλότερη τιμή που βρέθηκε
+        min: Math.min(...prices), 
+        max: Math.max(...prices) 
     };
   }, [properties]);
 
   const handlePriceSliderChange = (values: number | number[]) => {
-    // Το slider επιστρέφει έναν πίνακα [min, max]
+
     if (Array.isArray(values)) {
         updateFilter('minPrice', values[0].toString());
         updateFilter('maxPrice', values[1].toString());
@@ -212,14 +211,19 @@ export default function HomePage() {
 
             {/* Details */}
             <div className="filter-item">
-              <label>Details</label>
+              <label>Floor</label>
               <div className="range-inputs">
                 <input 
-                  type="number" placeholder="Floor" className="filter-input small"
+                  type="number" placeholder="Min" className="filter-input small"
                   value={filters.floor} onChange={e => updateFilter('floor', e.target.value)}
                 />
+              </div>
+            </div>
+             <div className="filter-item">
+              <label>Rooms</label>
+              <div className="range-inputs">
                 <input 
-                  type="number" placeholder="Rooms" className="filter-input small"
+                  type="number" placeholder="Min" className="filter-input small"
                   value={filters.rooms} onChange={e => updateFilter('rooms', e.target.value)}
                 />
               </div>
@@ -254,7 +258,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* SEARCH BUTTON (Δίπλα στα φίλτρα) */}
+            {/* SEARCH BUTTON */}
             <div className="filter-actions">
                 <button className="search-btn" onClick={handleSearch}>
                     <FontAwesomeIcon icon={faSearch} /> Search
@@ -267,7 +271,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* --- RESULTS INFO --- */}
+        {/* RESULTS INFO */}
         <div className="results-info">
            Found <strong>{filteredProperties.length}</strong> properties
         </div>

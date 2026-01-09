@@ -26,12 +26,12 @@ export default function Login() {
     let hasError = false;
 
     if (!username.trim()) {
-      setUsernameError('*Το Username είναι υποχρεωτικό');
+      setUsernameError('*Username is required');
       hasError = true;
     }
 
     if (!password.trim()) {
-      setPasswordError('*Το Password είναι υποχρεωτικό');
+      setPasswordError('*Password is required');
       hasError = true;
     }
     if (hasError) return;
@@ -70,16 +70,15 @@ export default function Login() {
         </header>
         <form className="login-form" onSubmit={handleSubmit}>
 
-          {/* --- USERNAME GROUP --- */}
+          {/* USERNAME  */}
           <div className="input-group">
             <label htmlFor="email" className="input-label">
               Username
             </label>
             <input
               className="input-field"
-              placeholder="Enter your email or Username"
+              placeholder="Enter your username"
               value={username}
-              /*onChange={e => setUsername(e.target.value)}*/
               onChange={e => {
                 setUsername(e.target.value);
                 if (usernameError) setUsernameError('');
@@ -88,7 +87,7 @@ export default function Login() {
             {usernameError && <span className="field-error-msg">{usernameError}</span>}
           </div>
 
-          {/* --- PASSWORD GROUP --- */}
+          {/* PASSWORD */}
           <div className="input-group">
             <label htmlFor="password" className="input-label">
               Password
@@ -98,7 +97,6 @@ export default function Login() {
               type="password"
               placeholder="Enter your password"
               value={password}
-              /*onChange={e => setPassword(e.target.value)}*/
               onChange={e => {
                 setPassword(e.target.value);
                 if (passwordError) setPasswordError('');

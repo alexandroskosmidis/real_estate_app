@@ -142,9 +142,7 @@ export default function CreatePropertyPage() {
     }
   };
 
-  // -----------------------------
-  // Render
-  // -----------------------------
+
   return (
     <div className="create-property-page">
       <div className="create-card">
@@ -155,7 +153,7 @@ export default function CreatePropertyPage() {
         <form onSubmit={submit} className="property-form">
           
           <div className="form-grid">
-            {/* Row 1: Purpose & Price */}
+
             <div className="form-group">
               <label>Purpose</label>
               <select 
@@ -169,7 +167,7 @@ export default function CreatePropertyPage() {
             </div>
 
             <div className="form-group">
-              <label>Date Available</label>
+              <label>Creation Date</label>
               <input 
                 type="date"
                 className="form-input"
@@ -188,7 +186,7 @@ export default function CreatePropertyPage() {
               />
             </div>
 
-            {/* Row 2: Size & Rooms */}
+
             <div className="form-group">
               <label>Size (sqm)</label>
               <input 
@@ -209,7 +207,7 @@ export default function CreatePropertyPage() {
               />
             </div>
 
-            {/* Row 3: Floor & City */}
+
             <div className="form-group">
               <label>Floor</label>
               <input 
@@ -233,7 +231,7 @@ export default function CreatePropertyPage() {
               />
             </div>
 
-            {/* Row 4: Area & Postal Code */}
+
             <div className="form-group">
               <label>Area</label>
               <input 
@@ -254,8 +252,8 @@ export default function CreatePropertyPage() {
               />
             </div>
 
-            {/* Row 5: Address & Number */}
-            <div className="form-group" style={{ flex: 2 }}> {/* Πιο μεγάλο Address */}
+
+            <div className="form-group" style={{ flex: 2 }}> 
               <label>Address</label>
               <input 
                 className="form-input"
@@ -278,7 +276,7 @@ export default function CreatePropertyPage() {
 
           <hr className="divider" />
 
-          {/* Amenities Section */}
+
           <div className="amenities-section">
             <h4>Amenities</h4>
             <div className="amenities-grid">
@@ -310,7 +308,8 @@ export default function CreatePropertyPage() {
           </button>
         </form>
 
-        {/* ---------- PHOTO UPLOAD ---------- */}
+
+
         {propertyId && (
           <div className="photo-upload-section">
             <hr className="divider" />

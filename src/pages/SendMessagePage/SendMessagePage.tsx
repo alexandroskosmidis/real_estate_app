@@ -42,7 +42,7 @@ export default function SendMessagePage() {
 
   return (
     <div className="send-message-container">
-      <h2>Επικοινωνία με τον ιδιοκτήτη</h2>
+      <h2>Communicate with the owner</h2>
 
       <PropertyCard property={property} />
 

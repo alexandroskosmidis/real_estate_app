@@ -98,7 +98,7 @@ export default function PropertyCard({ property }: Props) {
         </div>
 
         <div className="amenities-container">
-          {property.amenities.slice(0, 3).map((a, i) => (
+          {property.amenities.slice(0, 7).map((a, i) => (
             <span key={i} className="amenity-pill">
               {a}
             </span>
@@ -129,7 +129,6 @@ export default function PropertyCard({ property }: Props) {
         </div>
       </div>
 
-      {/* ✅ SEND MESSAGE BUTTON (top-right) */}
       <button
         className="send-message-btn"
         onClick={handleSendMessage}
