@@ -3,6 +3,7 @@
 	border-radius: 6px;
 	padding: 10px;
 	background: #fafafa;
+	overflow: hidden;
 }
 
 .message-header {
@@ -23,4 +24,15 @@
 	border: none;
 	border-top: 1px solid #e0e0e0;
 	margin: 8px 0;
+}
+
+.message-property-container {
+	border-top: 1px solid #e0e0e0;
+	margin-top: 10px;
+	padding-top: 10px;
+}
+.message-property-container h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #555;
 }

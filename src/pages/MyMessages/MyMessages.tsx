@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchMyMessages } from "../../services/MyMessages";
 import MessageItem from "../../components/MessageItem/MessageItem";
 import type { Message } from "../../types/message.types";
-import PropertyCard from "../../components/PropertyCard/PropertyCard";
+//import PropertyCard from "../../components/PropertyCard/PropertyCard";
 
 import "./MyMessages.css";
 
@@ -52,8 +52,8 @@ export default function MyMessages() {
 
           {openId === msg.message_id && (
              <div className="message-details">
-              <MessageItem message={msg} initialOpen={true} />
-              <PropertyCard property={msg.property} />
+              <MessageItem message={msg} property={msg.property} initialOpen={true} />
+              {/* <PropertyCard property={msg.property} isReadOnly={true} /> */}
             </div>
           )}
         </div>

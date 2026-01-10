@@ -178,6 +178,13 @@
   filter: brightness(1.05);
 }
 
+.property-card.static-card:hover {
+    transform: none;       /* Δεν κουνιέται */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Κρατάει την αρχική σκιά, δεν την μεγαλώνει */
+    cursor: default;       /* Δεν βγάζει το χεράκι */
+}
+
+
 @media (max-width: 600px) {
   .property-card {
     flex-direction: column;

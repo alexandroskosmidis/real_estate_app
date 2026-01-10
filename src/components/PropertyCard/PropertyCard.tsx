@@ -12,9 +12,10 @@ import type { Property } from './Property.types';
 
 type Props = {
   property: Property;
+  isReadOnly?: boolean;
 };
 
-export default function PropertyCard({ property }: Props) {
+export default function PropertyCard({ property, isReadOnly = false }: Props) {
   const navigate = useNavigate();
 
   const placeholderImg =
@@ -39,7 +40,7 @@ export default function PropertyCard({ property }: Props) {
   };
 
   return (
-    <div className="property-card">
+    <div className={`property-card ${isReadOnly ? 'static-card' : ''}`}>
       {/* Image */}
       <div className="card-image-container">
         <span
@@ -128,13 +129,14 @@ export default function PropertyCard({ property }: Props) {
           </div>
         </div>
       </div>
-
+    {!isReadOnly &&(
       <button
         className="send-message-btn"
         onClick={handleSendMessage}
       >
         Send a Message
       </button>
+    )}
     </div>
   );
 }

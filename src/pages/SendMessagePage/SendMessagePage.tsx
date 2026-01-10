@@ -44,7 +44,7 @@ export default function SendMessagePage() {
     <div className="send-message-container">
       <h2>Communicate with the owner</h2>
 
-      <PropertyCard property={property} />
+      <PropertyCard property={property} isReadOnly={true} />
 
       <textarea
         placeholder="Write your message..."
